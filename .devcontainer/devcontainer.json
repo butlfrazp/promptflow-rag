@@ -1,0 +1,78 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/python-3
+{
+    "name": "Promptflow - Development",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "..",
+      "target": "development"
+    },
+
+    // Forward Jupyter port
+    "forwardPorts": [8888],
+    "portsAttributes": {
+      "8888": {
+        "label": "Jupyter",
+        "requireLocalPort": true,
+        "onAutoForward": "ignore"
+      }
+    },
+
+    // Set container specific settings
+    "hostRequirements": {
+      "cpus": 4
+    },
+
+    // Configure tool-specific properties.
+    "customizations": {
+      // Configure properties specific to VS Code.
+      "vscode": {
+        // Set *default* container specific settings.json values on container create.
+        "settings": {
+          // Activate conda-env conda environment
+          "python.terminal.activateEnvironment": true,
+          "python.condaPath": "/opt/conda/bin/conda",
+          "python.defaultInterpreterPath": "/opt/conda/envs/conda-env/bin/python",
+
+          // Linting/formatting
+          "python.linting.enabled": true,
+          "python.linting.pylintEnabled": false,
+          "python.linting.flake8Enabled": true,
+          "python.formatting.blackPath": "/opt/conda/envs/conda-env/bin/black",
+          "python.linting.flake8Path": "/opt/conda/envs/conda-env/bin/flake8",
+          "python.linting.pycodestylePath": "/opt/conda/envs/conda-env/bin/pycodestyle"
+        },
+
+        // Add the IDs of extensions you want installed when the container is created.
+        "extensions": [
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "ms-toolsai.vscode-ai-remote",
+          "ms-azure-devops.azure-pipelines",
+          "ms-toolsai.vscode-ai",
+          "GitHub.copilot",
+          "streetsidesoftware.code-spell-checker",
+          "ms-python.flake8",
+          "Cameron.vscode-pytest",
+          "ms-python.isort",
+          "ms-toolsai.jupyter",
+          "${containerWorkspaceFolder}/extensions/prompt-flow-0.0.31.vsix"
+        ]
+      }
+    },
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode",
+    "features": {
+      "git": "os-provided",
+      "azure-cli": "latest",
+      "ghcr.io/devcontainers/features/python:1": {
+        // avoid python install
+        "version": "none",
+        "installTools": false,
+        // prevent jupyter CORS error
+        "installJupyterlab": true,
+        "configureJupyterlabAllowOrigin": "*"
+      }
+    },
+    "postCreateCommand": "/bin/bash .devcontainer/post_create.sh"
+  }

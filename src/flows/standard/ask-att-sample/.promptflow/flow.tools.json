@@ -1,0 +1,147 @@
+{
+  "package": {
+    "embeddingstore.tool.vector_db_lookup.VectorDBLookup.search": {
+      "name": "Vector DB Lookup",
+      "description": "Search vector based query from existing Vector Database.",
+      "type": "python",
+      "module": "embeddingstore.tool.vector_db_lookup",
+      "class_name": "VectorDBLookup",
+      "function": "search",
+      "inputs": {
+        "connection": {
+          "type": [
+            "CognitiveSearchConnection"
+          ]
+        },
+        "index_name": {
+          "default": null,
+          "type": [
+            "string"
+          ]
+        },
+        "text_field": {
+          "default": null,
+          "type": [
+            "string"
+          ]
+        },
+        "vector_field": {
+          "default": null,
+          "type": [
+            "string"
+          ]
+        },
+        "search_params": {
+          "default": null,
+          "type": [
+            "object"
+          ]
+        },
+        "search_filters": {
+          "default": null,
+          "type": [
+            "object"
+          ]
+        },
+        "vector": {
+          "type": [
+            "list"
+          ]
+        },
+        "top_k": {
+          "default": "3",
+          "type": [
+            "int"
+          ]
+        }
+      },
+      "package": "embeddingstore",
+      "package_version": "0.0.101742157"
+    },
+    "promptflow.tools.embedding.embedding": {
+      "name": "Embedding",
+      "description": "Use Open AI's embedding model to create an embedding vector representing the input text.",
+      "type": "python",
+      "module": "promptflow.tools.embedding",
+      "function": "embedding",
+      "inputs": {
+        "connection": {
+          "type": [
+            "AzureOpenAIConnection",
+            "OpenAIConnection"
+          ]
+        },
+        "deployment_name": {
+          "type": [
+            "string"
+          ],
+          "enabled_by": "connection",
+          "enabled_by_type": [
+            "AzureOpenAIConnection"
+          ],
+          "capabilities": {
+            "completion": false,
+            "chat_completion": false,
+            "embeddings": true
+          },
+          "model_list": [
+            "text-embedding-ada-002",
+            "text-search-ada-doc-001",
+            "text-search-ada-query-001"
+          ]
+        },
+        "model": {
+          "type": [
+            "string"
+          ],
+          "enabled_by": "connection",
+          "enabled_by_type": [
+            "OpenAIConnection"
+          ],
+          "enum": [
+            "text-embedding-ada-002",
+            "text-search-ada-doc-001",
+            "text-search-ada-query-001"
+          ]
+        },
+        "input": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "package": "promptflow-tools",
+      "package_version": "0.1.0b4"
+    }
+  },
+  "code": {
+    "hello.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "hello.py",
+      "function": "my_python_tool"
+    },
+    "prompt.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "few_shots": {
+          "type": [
+            "string"
+          ]
+        },
+        "text": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "prompt.jinja2"
+    }
+  }
+}

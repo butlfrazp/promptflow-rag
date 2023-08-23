@@ -1,0 +1,13 @@
+--extra-index-url https://azuremlsdktestpypi.azureedge.net/promptflow/
+promptflow
+promptflow-vectordb
+promptflow-tools
+embeddingstore
+langchain==0.0.271
+azure-search-documents==11.4.0b6
+azure-identity
+python-dotenv
+unstructured
+tqdm
+tiktoken
+keyrings.alt==5.0.0

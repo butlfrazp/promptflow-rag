@@ -1,0 +1,11 @@
+name: conda-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.9
+  - pip
+  - ipython==8.*
+  - jupyter==1.0.0
+  - black==23.3.0
+  - flake8==6.0.0

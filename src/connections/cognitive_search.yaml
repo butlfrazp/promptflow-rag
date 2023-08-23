@@ -1,0 +1,7 @@
+# All the values should be string type, please use "123" instead of 123 or "True" instead of True.
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/CognitiveSearchConnection.schema.json
+name: cognitive_search_connection
+type: cognitive_search  # snake case
+api_key: "<congnitive-search-api-key>"
+api_base: "endpoint"
+api_version: "2023-07-01-Preview"

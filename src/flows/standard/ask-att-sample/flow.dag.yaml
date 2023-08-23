@@ -1,0 +1,58 @@
+id: template_standard_flow
+name: Template Standard Flow
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  text:
+    type: string
+    default: What is Langchain
+outputs:
+  output:
+    type: string
+    reference: ${llm.output}
+nodes:
+- name: embedding
+  type: python
+  source:
+    type: package
+    tool: promptflow.tools.embedding.embedding
+  inputs:
+    connection: azure_openai_connection
+    deployment_name: text-embedding-ada-002
+    input: ${inputs.text}
+- name: vectordb_lookup
+  type: python
+  source:
+    type: package
+    tool: embeddingstore.tool.vector_db_lookup.VectorDBLookup.search
+  inputs:
+    connection: cognitive_search_connection
+    index_name: ask-att-cog-search-pb-index
+    text_field: content
+    vector_field: content_vector
+    top_k: 3
+    vector: ${embedding.output}
+    search_params: {}
+    search_filters: {}
+- name: prompt
+  type: prompt
+  source:
+    type: code
+    path: prompt.jinja2
+  inputs:
+    few_shots: ${vectordb_lookup.output}
+    text: ${inputs.text}
+- name: llm
+  type: llm
+  source:
+    type: code
+    path: prompt.jinja2
+  inputs:
+    prompt: ${prompt.output}
+    deployment_name: text-davinci-003
+    max_tokens: 256
+    temperature: 0.1
+  provider: AzureOpenAI
+  connection: azure_openai_connection
+  api: completion
+  module: promptflow.tools.aoai
