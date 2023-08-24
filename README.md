@@ -68,7 +68,7 @@ This script will both create the index (based on the index file name in your .en
 To test the flow, run the following command:
 
 ```bash
-pf flow test --flow src/flows/standard/ask-att-sample --inputs text="What is Langchain?"
+pf flow test --flow src/flows/standard/promptflow-rag --inputs text="What is Langchain?"
 ```
 
 ### Running the Flow
@@ -76,5 +76,5 @@ pf flow test --flow src/flows/standard/ask-att-sample --inputs text="What is Lan
 To run the flow, run the following command:
 
 ```bash
-pf run create --flow --flow src/flows/standard/ask-att-sample --data src/flows/standard/ask-att-sample/data.jsonl
+pf run create --flow --flow src/flows/standard/promptflow-rag --data src/flows/standard/promptflow-rag/data.jsonl
 ```
